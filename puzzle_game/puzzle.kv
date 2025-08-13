@@ -1,0 +1,62 @@
+#:kivy 2.1.0
+
+<MainScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 10
+        padding: 20
+        Label:
+            text: "Elige el puzzle"
+            font_size: 30
+        Button:
+            text: "8 Puzzle (3x3)"
+            on_press: app.start_game(3)
+        Button:
+            text: "15 Puzzle (4x4)"
+            on_press: app.start_game(4)
+
+<GameScreen>:
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 5
+        BoxLayout:
+            size_hint_y: None
+            height: "40dp"
+            spacing: 10
+            Label:
+                id: moves_label
+                text: "Movimientos: 0"
+                size_hint_x: 1
+            Button:
+                text: "Volver"
+                size_hint_x: None
+                width: "120dp"
+                on_release: app.go_back()
+        BoxLayout:
+            id: game_box
+        Button:
+            text: "Reiniciar"
+            size_hint_y: None
+            height: "40dp"
+            on_release: app.reset_game()
+
+<PuzzleGame>:
+    orientation: "vertical"
+    spacing: 10
+    padding: 20
+
+    BoxLayout:
+        size_hint_y: None
+        height: "40dp"
+        Button:
+            text: "Modo Manual"
+            on_release: root.start_manual()
+        Button:
+            text: "Resolver Automático"
+            on_release: root.start_auto()
+
+    GridLayout:
+        id: grid
+        cols: root.size_n
+        rows: root.size_n
+        spacing: 5
